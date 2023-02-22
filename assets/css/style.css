@@ -1,0 +1,38 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+main .bi{
+	width: 16px;
+	height: 16px;
+	fill: black;
+}
+
+.card{
+	width: 18rem;
+	height: 24rem;
+	margin-top: 9vh;
+}
+
+.card-img-top{
+	width: 90%;
+	height:8rem;
+	margin-left: 5%;
+	margin-top: 5%;
+	box-shadow: -5px -5px 5px rgb(153, 153, 153);
+}
+
+.card .btn {
+	box-shadow: -5px -5px 5px rgb(143, 143, 143) !important; 
+}
+
+footer{
+	min-height: 5vh;
+}
+
+footer .bi{
+	width: 32px;
+	fill: whitesmoke;
+}
