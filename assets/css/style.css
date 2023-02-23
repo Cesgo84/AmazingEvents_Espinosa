@@ -13,7 +13,7 @@ main .bi{
 .card{
 	width: 18rem;
 	height: 24rem;
-	margin-top: 9vh;
+	margin-top: 8vh;
 }
 
 .card-img-top{
@@ -24,8 +24,38 @@ main .bi{
 	box-shadow: -5px -5px 5px rgb(153, 153, 153);
 }
 
+.details-event{
+	min-height: 570px; 
+	min-width: 350px;
+}
+
 .card .btn {
-	box-shadow: -5px -5px 5px rgb(143, 143, 143) !important; 
+	box-shadow: -5px -5px 5px rgb(143, 143, 143); 
+}
+
+.contact-form{
+	margin-top: 5rem;
+}
+
+@media(max-width:479px){
+	.contact-form{
+		max-width: 100%;
+	}
+}
+
+@media(min-width:480px){
+	.contact-form{
+		max-width: 50% ;
+	}
+}
+
+table td{
+	font-size: .8rem ;
+}
+
+.table-secondary{
+	font-size: 1rem;
+	padding: 0 !important;
 }
 
 footer{
