@@ -1,0 +1,113 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.space {
+	width: 40%;
+}
+
+@media(max-width:1399px){
+	.space {
+		width: 30%;
+	}
+}
+
+@media(max-width:1100px){
+	.space {
+		width: 20%;
+	}
+}
+
+@media(max-width:997px){
+	.space {
+		width: 15%;
+	}
+
+	.navbar-brand {
+	height: 90px;
+    width: 350px;
+	}
+}
+
+@media(max-width:551px){
+	.space{
+	width: 0;
+	}
+}
+
+@media(max-width:446px){
+	.navbar-brand{
+		width: 300px;
+	}
+}
+
+@media(max-width:396px){
+	.navbar-brand{
+		width: 250px;
+	}
+}
+
+main .bi{
+	width: 16px;
+	height: 16px;
+	fill: black;
+}
+
+.card{
+	width: 18rem;
+	height: 24rem;
+	margin-top: 8vh;
+}
+
+.card-img-top{
+	width: 90%;
+	height:8rem;
+	margin-left: 5%;
+	margin-top: 5%;
+	box-shadow: -5px -5px 5px rgb(153, 153, 153);
+}
+
+#details-event{
+	min-height: 570px; 
+	min-width: 350px;
+}
+
+.card .btn {
+	box-shadow: -5px -5px 5px rgb(143, 143, 143); 
+}
+
+.contact-form{
+	margin-top: 5rem;
+}
+
+@media(max-width:479px){
+	.contact-form{
+		max-width: 100%;
+	}
+}
+
+@media(min-width:480px){
+	.contact-form{
+		max-width: 50% ;
+	}
+}
+
+table td{
+	font-size: .8rem ;
+}
+
+.table-secondary{
+	font-size: 1rem;
+	padding: 0 !important;
+}
+
+footer{	
+	min-height: 5vh;
+}
+
+footer .bi{
+	width: 24px;
+	fill: whitesmoke;
+}
