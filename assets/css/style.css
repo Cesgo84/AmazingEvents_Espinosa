@@ -49,6 +49,10 @@
 	}
 }
 
+main {
+	min-height: 100rem;
+}
+
 main .bi{
 	width: 16px;
 	height: 16px;
@@ -58,7 +62,9 @@ main .bi{
 .card{
 	width: 18rem;
 	height: 24rem;
-	margin-top: 8vh;
+	margin-top: 3vh;
+	margin-bottom: 5vh;
+
 }
 
 .card-img-top{
