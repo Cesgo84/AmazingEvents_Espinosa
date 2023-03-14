@@ -1,27 +1,28 @@
 import data from './amazing.js';
+import {cardsMakerII,upcomingEvents,pastEvents,gettingCategories} from './functions.js'
 
 const placeOfCards = document.getElementById('lot-of-cards');
-const {events} = data;
-const {currentDate} = data;
+const events = data.events;
+const arrayCategory = gettingCategories(events);
+const checksCategories = document.getElementById('category_checks')
 
-let cards = '';
-
-function cardsMaker(array, date){
-	for(event of array){
-		cards = cards + `<div class="card">
-					<img src=${event.image} class="card-img-top" alt="event">
-					<div class="card-body">
-						<h5 class="card-title">${event.name}</h5>
-						<p class="card-text">${event.description}</p>
-						<p class="price card-text">Price:${event.price}</p>
-						<a href="./pages/details.html" class="btn btn-primary">view details</a>
-					</div>
-				</div>`
+function categoryChecks(array,container){
+	let fragment = document.createDocumentFragment();
+	for(let i=0;i<array.length;i++){
+		let check = document.createElement("label");
+		console.log([check]);
+		check.classList = 'col-12 col-md';
+		check.htmlFor = `'${array[i].toLowerCase()}'`;
+		check.innerHTML = `<input type="checkbox" name="${array[i].toLowerCase()}" id="${array[i].toLowerCase()}" value="${array[i].toLowerCase()}">${array[i]}`;
+		fragment.appendChild(check);
+		console.log(fragment);
 	}
-	return cards;
+	return container.insertBefore(fragment,search);
 }
 
-cardsMaker(events, currentDate)
-console.log(cards);
+categoryChecks(arrayCategory,checksCategories);
 
-placeOfCards.innerHTML = cards
+cardsMakerII(events,placeOfCards);
+console.log(events);
+
+console.log(arrayCategory);
