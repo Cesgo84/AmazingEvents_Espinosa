@@ -8,6 +8,10 @@
 	width: 40%;
 }
 
+.title {
+	background-image: url();
+}
+
 @media(max-width:1399px){
 	.space {
 		width: 30%;
@@ -27,13 +31,13 @@
 
 	.navbar-brand {
 	height: 90px;
-    width: 350px;
+   		 width: 350px;
 	}
 }
 
 @media(max-width:551px){
 	.space{
-	width: 0;
+		width: 0;
 	}
 }
 
@@ -50,7 +54,7 @@
 }
 
 main {
-	min-height: 100rem;
+	min-height: 80rem;
 }
 
 main .bi{
@@ -60,11 +64,11 @@ main .bi{
 }
 
 .card{
+	background: #ddffdd;
 	width: 18rem;
-	height: 24rem;
-	margin-top: 3vh;
-	margin-bottom: 5vh;
-
+	min-height: 24rem;
+	margin-top: 2vh;
+	margin-bottom:2vh;
 }
 
 .card-img-top{
@@ -75,8 +79,14 @@ main .bi{
 	box-shadow: -5px -5px 5px rgb(153, 153, 153);
 }
 
-#details-event{
-	min-height: 570px; 
+.details-img{
+	flex-grow: 1;
+ 	width: 50%;
+ 	height: 70%;
+}
+
+#eventDetail{
+	min-height: 570px ; 
 	min-width: 350px;
 }
 
@@ -110,6 +120,7 @@ table td{
 }
 
 footer{	
+	background-color: #f12e7a;
 	min-height: 5vh;
 }
 
