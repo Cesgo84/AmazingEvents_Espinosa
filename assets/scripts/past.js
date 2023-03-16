@@ -1,35 +1,16 @@
-import data from "./amazing.js"
+import data from "./amazing.js";
+import {cardsMakerII,pastEvents,amazingFilter,settingCategoryCheckBoxes,filterByCheckboxes} from './functions.js';
 
 const placeOfCards = document.getElementById('lot-of-cards');
-const {events} = data;
-const {currentDate} = data;
-let cards = '';
+const eventsOfThePast = pastEvents(data.events,data.currentDate);
+const input = document.querySelector('input');
+const checksCategories = document.getElementById('category_checks');
 
-let eventsOfThePast=[];
-function pastEvents (array, date){
-	for (let event of events) {
-		if (event.date<date){
-			eventsOfThePast.push(event)
-		}
-	}
-	return(eventsOfThePast);
-}
-
-function cardsMaker(array){
-	for(event of array){
-		cards = cards + `<div class="card">
-					<img src=${event.image} class="card-img-top" alt="event">
-					<div class="card-body">
-						<h5 class="card-title">${event.name}</h5>
-						<p class="card-text">${event.description}</p>
-						<p class="price card-text">Price:${event.price}</p>
-						<a href="./pages/details.html" class="btn btn-primary">view details</a>
-					</div>
-				</div>`
-	}
-	return cards;
-}
-pastEvents(events,currentDate);
-cardsMaker(eventsOfThePast)
-
-placeOfCards.innerHTML = cards
+settingCategoryCheckBoxes(eventsOfThePast);
+cardsMakerII(eventsOfThePast,placeOfCards);
+input.addEventListener('input', ()=> {
+		amazingFilter(eventsOfThePast,placeOfCards,input.value);
+});
+checksCategories.addEventListener('change', ()=> {
+		amazingFilter(eventsOfThePast,placeOfCards,input.value);
+});
