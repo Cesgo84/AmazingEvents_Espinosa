@@ -25,6 +25,9 @@
 }
 
 @media(max-width:997px){
+	#search {
+		
+	}
 	.space {
 		width: 15%;
 	}

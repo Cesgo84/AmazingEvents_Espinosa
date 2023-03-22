@@ -19,6 +19,7 @@ function upcomingEvents (arrayEntrada, date){
 	})
 	return eventsToCome;
 }
+
 function cardsMakerII(array,container,ruta="./"){
 	if(array.length == 0){
         container.innerHTML = `<h2 class=" fw-bold">No item match your Search</h2>`
@@ -102,7 +103,7 @@ function settingCategoryCheckBoxes(array) {
 	arrayCategory.forEach((category)=>{
 		let check = document.createElement("label");
 		check.classList = 'col-12 col-md';
-		check.htmlFor = `'${category.toLowerCase()}'`;
+		check.htmlFor = `${category.toLowerCase()}`;
 		check.innerHTML = `<input type="checkbox" name="${category.toLowerCase()}" id="${category.toLowerCase()}" value="${category.toLowerCase()}">${category}`;
 		fragment.appendChild(check);
 	})
