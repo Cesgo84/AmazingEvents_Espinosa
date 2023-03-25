@@ -58,6 +58,7 @@ function amazingFilter(array,container,text,ruta="./"){
 function createDetails(object,target){
 	let event = document.createElement("div");
 	event.className= "cardDetails d-flex flex-row flex-grow-1 w-100"
+	if ('assistance' in object) {
 	event.innerHTML= `<img src=${object.image} class="d-flex flex-column card-img-top details-img object-fit-cover" alt="cardDetail">
 					<div class="card-body">
 						<h5 class="card-title">${object.name}</h5>
@@ -91,6 +92,42 @@ function createDetails(object,target){
 						</div>
 					</div>`;
 	return target.appendChild(event);
+	} else { 
+	event.innerHTML= `<img src=${object.image} class="d-flex flex-column card-img-top details-img object-fit-cover" alt="cardDetail">
+					<div class="card-body">
+						<h5 class="card-title">${object.name}</h5>
+						<p class="card-text">${object.description}</p>
+						<dl class="card-text d-flex flex-wrap justify-content-baseline gap-3 m-0">
+							<dt>Date:</dt>
+							<dd>${object.date}</dd>									
+						</dl>
+						<dl class="card-text d-flex flex-wrap justify-content-baseline gap-3 m-0">
+							<dt>Category:</dt>
+							<dd>${object.category}</dd>
+						</dl>
+						<dl class="card-text d-flex flex-wrap justify-content-baseline gap-3 m-0">
+							<dt>Place:</dt>
+							<dd>${object.place}</dd>
+						</dl>
+						<dl class="card-text d-flex flex-wrap justify-content-baseline gap-3 m-0">
+							<dt>Capacity:</dt>
+							<dd>${object.capacity}</dd>
+						</dl>
+						<dl class="card-text d-flex flex-wrap justify-content-baseline gap-3 m-0">
+							<dt>Estimate:</dt>
+							<dd>${object.estimate}</dd>
+						</dl>
+						<dl class="card-text d-flex flex-wrap justify-content-baseline gap-3">
+							<dt>Price:</dt>
+							<dd>${object.price}</dd>
+						</dl>
+						<div class="d-flex flex-Wrap justify-content-end">
+							<a href="javascript:history.back()" class="d-flex btn btn-details align-self-end w-50 go bg-primary text-light">Go Back</a>
+						</div>
+					</div>`;
+	return target.appendChild(event);
+
+	}
 }
 
 
@@ -123,6 +160,85 @@ function filterByCheckboxes (array){
 	return array;
 } 
 
+let mappingPercentOfAssistance = (objectsArray) => objectsArray.map(event =>{
+        return 'assistance' in event ? Math.round(event.assistance*100/event.capacity) : Math.round(event.estimate*100/event.capacity);
+    })
+
+function dataForEventsTable (objectsArray){ 
+    const percentOfAssistance = mappingPercentOfAssistance(objectsArray);
+    let largestCapEvent = []; 
+    let capacity = 0;
+    objectsArray.forEach(event =>{
+        event.capacity > capacity ? (capacity = event.capacity , largestCapEvent = event.name) : capacity; 
+    })
+    // console.log(percentOfAssistance);
+    // console.log(capacity);
+    const mostAttendedEvent = (objectsArray[percentOfAssistance.indexOf(Math.max(...percentOfAssistance))].name);
+    const lessAttendedEvent = (objectsArray[percentOfAssistance.indexOf(Math.min(...percentOfAssistance))].name);
+    // console.log(mostAttendedEvent);
+    // console.log(lessAttendedEvent);
+    // console.log(largestCapEvent);
+    // console.log(capacity);
+    const dataRowTableOne = {
+        highestAttendance: mostAttendedEvent,
+        lowestAttendance: lessAttendedEvent,
+        largerCapacity: largestCapEvent
+    };
+    // console.log(dataTableOne);
+    return dataRowTableOne
+}
+
+function fillerTableDataTR (container,object){
+    // console.log(object);
+    let tRow = document.createElement('tr');
+    Object.values(object).forEach(value=> {
+    let tData = document.createElement("td");
+    tData.innerText= value
+    tRow.appendChild(tData);
+})
+    return container.appendChild(tRow)
+}
+
+function fillerTableDataTrII(container,objectsArray){
+    objectsArray.forEach(object => {
+        fillerTableDataTR(container, object)
+    })
+}
+
+function dataForTablesUpcomingAndPast(arrayDeObjetos,eventsFunction,date){ //  eventsFunction DEPENDS ON WHETHER THEY ARE PAST OR UPCOMING EVENTS use pastEvents or upcomingEvents accordingly.
+    const eventsByDate = eventsFunction(arrayDeObjetos,date);
+    // console.log(eventsByDate);
+    const objectReduced = eventsByDate.reduce((categories,event) => {
+        const category = event.category;
+        const capacity = event.capacity;
+        const assistance = 'assistance' in event ? event.assistance : event.estimate;
+        const revenue = 'assistance' in event ? event.price*event.assistance : event.price*event.estimate;
+        // console.log(revenue);
+        categories[category] = categories[category] || {
+            category: category,
+            capacity: 0,
+            assistance: 0,
+            revenue: 0,
+        };
+        categories[category].capacity += capacity;
+        categories[category].assistance += assistance;
+        categories[category].revenue += revenue;
+
+        // console.log(categories);
+        return categories;
+    }, {});
+    // console.log(Object.values(objectReduced));
+    const arrayForTablePrev = Object.values(objectReduced); 
+    // console.log(arrayForTablePrev);
+    const percentOfAssistance = arrayForTablePrev.map(category => (category.assistance*100/category.capacity).toFixed(2));
+    // console.log(percentOfAssistance);
+    const arrayforTableAlmost = arrayForTablePrev.map(group => ({...group, percentOfAssistance: percentOfAssistance[arrayForTablePrev.indexOf(group)]}));
+    // console.log(arrayforTableAlmost);
+    const arrayforTable = arrayforTableAlmost.map(({capacity, assistance, ...rest}) => ({...rest}));
+    // console.log(arrayforTable);
+    return arrayforTable;
+}
+
 
 //CODIGO GUARDADO:
 
@@ -147,5 +263,10 @@ export {
 	filterByCheckboxes,
 	filterByInputSearch,
 	amazingFilter,
-	createDetails
+	createDetails,
+	dataForTablesUpcomingAndPast,
+	mappingPercentOfAssistance, 
+	dataForEventsTable,
+	fillerTableDataTR,
+	fillerTableDataTrII,
 }

@@ -10,10 +10,9 @@ async function getEventsData() {
 		const detailContainer = document.querySelector('#eventDetail');
 		createDetails(event,detailContainer);
   		return data;
-	})
+	}).catch ((error) => console.error(error)) 
 	console.log(data);
 }
-
 getEventsData();
   
 import {createDetails} from './functions.js'
