@@ -96,13 +96,16 @@ main .bi{
 }
 
 .details-img{
-	flex-grow: 1;
- 	width: 50%;
- 	height: 70%;
+	border-radius: 5px;
+	max-width: 90%;
+	height:18rem;
+	margin-left: 5%;
+	margin-top: 5%;
+	box-shadow: -5px -5px 5px rgb(153, 153, 153);
 }
 
 #eventDetail{
-	min-height: 570px ; 
+	min-height: 400px ; 
 	min-width: 350px;
 }
 
@@ -126,8 +129,17 @@ main .bi{
 	}
 }
 
+form {
+	border-radius: 5px;
+	padding: 15px;
+}
+
+form, table{
+	background: #ddffdd;
+}
+
 table td{
-	font-size: .8rem ;
+	font-size: 1.2rem ;
 }
 
 .table-secondary{

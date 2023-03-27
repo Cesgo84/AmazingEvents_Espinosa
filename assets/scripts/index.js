@@ -1,5 +1,3 @@
-import {cardsMakerII, amazingFilter, settingCategoryCheckBoxes, filterByCheckboxes, filterByInputSearch} from './functions.js';
-
 async function getEventsData() {
 	let data = await fetch('../../back/amazing.json')
   	.then(response => response.json())
@@ -19,9 +17,10 @@ async function getEventsData() {
 		})
   	return data;
 	}).catch ((error) => console.error(error)) 
-  	 console.log(data);
+  	 //console.log(data);
 }  
-
 getEventsData()
+
+import {cardsMakerII, amazingFilter, settingCategoryCheckBoxes, filterByCheckboxes, filterByInputSearch} from './functions.js';
 
 

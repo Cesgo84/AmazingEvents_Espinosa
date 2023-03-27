@@ -57,11 +57,10 @@ function amazingFilter(array,container,text,ruta="./"){
 
 function createDetails(object,target){
 	let event = document.createElement("div");
-	event.className= "cardDetails d-flex flex-row flex-grow-1 w-100"
-	if ('assistance' in object) {
-	event.innerHTML= `<img src=${object.image} class="d-flex flex-column card-img-top details-img object-fit-cover" alt="cardDetail">
+	event.className= "cardDetails d-flex flex-column"
+	event.innerHTML= `<img src=${object.image} class="details-img object-fit-cover mt-5" alt="cardDetail">
 					<div class="card-body">
-						<h5 class="card-title">${object.name}</h5>
+						<h5 class="card-title pt-4">${object.name}</h5>
 						<p class="card-text">${object.description}</p>
 						<dl class="card-text d-flex flex-wrap justify-content-baseline gap-3 m-0">
 							<dt>Date:</dt>
@@ -81,7 +80,7 @@ function createDetails(object,target){
 						</dl>
 						<dl class="card-text d-flex flex-wrap justify-content-baseline gap-3 m-0">
 							<dt>Assistance:</dt>
-							<dd>${object.assistance}</dd>
+							<dd>${(object.assistance? object.assistance : object.estimate)}</dd>
 						</dl>
 						<dl class="card-text d-flex flex-wrap justify-content-baseline gap-3">
 							<dt>Price:</dt>
@@ -92,42 +91,6 @@ function createDetails(object,target){
 						</div>
 					</div>`;
 	return target.appendChild(event);
-	} else { 
-	event.innerHTML= `<img src=${object.image} class="d-flex flex-column card-img-top details-img object-fit-cover" alt="cardDetail">
-					<div class="card-body">
-						<h5 class="card-title">${object.name}</h5>
-						<p class="card-text">${object.description}</p>
-						<dl class="card-text d-flex flex-wrap justify-content-baseline gap-3 m-0">
-							<dt>Date:</dt>
-							<dd>${object.date}</dd>									
-						</dl>
-						<dl class="card-text d-flex flex-wrap justify-content-baseline gap-3 m-0">
-							<dt>Category:</dt>
-							<dd>${object.category}</dd>
-						</dl>
-						<dl class="card-text d-flex flex-wrap justify-content-baseline gap-3 m-0">
-							<dt>Place:</dt>
-							<dd>${object.place}</dd>
-						</dl>
-						<dl class="card-text d-flex flex-wrap justify-content-baseline gap-3 m-0">
-							<dt>Capacity:</dt>
-							<dd>${object.capacity}</dd>
-						</dl>
-						<dl class="card-text d-flex flex-wrap justify-content-baseline gap-3 m-0">
-							<dt>Estimate:</dt>
-							<dd>${object.estimate}</dd>
-						</dl>
-						<dl class="card-text d-flex flex-wrap justify-content-baseline gap-3">
-							<dt>Price:</dt>
-							<dd>${object.price}</dd>
-						</dl>
-						<div class="d-flex flex-Wrap justify-content-end">
-							<a href="javascript:history.back()" class="d-flex btn btn-details align-self-end w-50 go bg-primary text-light">Go Back</a>
-						</div>
-					</div>`;
-	return target.appendChild(event);
-
-	}
 }
 
 
@@ -161,7 +124,7 @@ function filterByCheckboxes (array){
 } 
 
 let mappingPercentOfAssistance = (objectsArray) => objectsArray.map(event =>{
-        return 'assistance' in event ? Math.round(event.assistance*100/event.capacity) : Math.round(event.estimate*100/event.capacity);
+        return event.assistance ? Math.round(event.assistance*100/event.capacity) : Math.round(event.estimate*100/event.capacity);
     })
 
 function dataForEventsTable (objectsArray){ 
@@ -206,13 +169,13 @@ function fillerTableDataTrII(container,objectsArray){
 }
 
 function dataForTablesUpcomingAndPast(arrayDeObjetos,eventsFunction,date){ //  eventsFunction DEPENDS ON WHETHER THEY ARE PAST OR UPCOMING EVENTS use pastEvents or upcomingEvents accordingly.
-    const eventsByDate = eventsFunction(arrayDeObjetos,date);
+    let eventsByDate = eventsFunction(arrayDeObjetos,date);
     // console.log(eventsByDate);
     const objectReduced = eventsByDate.reduce((categories,event) => {
         const category = event.category;
         const capacity = event.capacity;
         const assistance = 'assistance' in event ? event.assistance : event.estimate;
-        const revenue = 'assistance' in event ? event.price*event.assistance : event.price*event.estimate;
+        const revenue = event.assistance ? event.price*event.assistance : event.price*event.estimate;
         // console.log(revenue);
         categories[category] = categories[category] || {
             category: category,
